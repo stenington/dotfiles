@@ -87,6 +87,11 @@ if has("autocmd")
 	autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
 endif
 
+" Auto-indentation on
+set ai
+" Expand tabs to spaces
+set expandtab
+
 " Split window nav·
 " These maximize the targeted window:
 "map <C-J> <C-W>j<C-W>_
