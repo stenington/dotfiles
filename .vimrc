@@ -137,3 +137,8 @@ endfunction
 
 " start Pathogen
 call pathogen#infect()
+
+" Paste mode toggle (Ctrl-a)
+nnoremap <c-a> :set invpaste paste?<CR>
+set pastetoggle=<c-a>
+set showmode
