@@ -1,4 +1,22 @@
-# Mathias’s dotfiles
+# Stenington's fork of **Mathias’s dotfiles**
+
+## Why fork?
+
+I'm less interested in pulling down the latest greatest additions to the project and
+more interested in having my basic dev setup and preferences defined somewhere. (For posterity,
+I guess.).
+
+Machine-specific and/or settings being used on a trial basis go in `~/.extra`.
+
+## Additions to the repo
+
+Aside from changing the dotfiles to my heart's content, I've:
+
+  * added [pathogen][pathogen] and some vim plugins as submodules
+  * added an `init` directory to pull down some other useful things, 
+    like `Terminal` color schemes
+
+[pathogen]: https://github.com/tpope/vim-pathogen "pathogen.vim: manage your runtimepath"
 
 ## Installation
 

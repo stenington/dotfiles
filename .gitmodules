@@ -4,3 +4,6 @@
 [submodule ".vim/bundle/nerdtree"]
 	path = .vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
+[submodule "init/solarized"]
+	path = init/solarized
+	url = https://github.com/tomislav/osx-lion-terminal.app-colors-solarized.git
