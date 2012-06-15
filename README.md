@@ -1,4 +1,7 @@
-# Stenington's fork of **Mathias’s dotfiles**
+*Stenington's fork of*:
+# Mathias’s dotfiles
+
+***
 
 ## Why fork?
 
@@ -17,6 +20,8 @@ Aside from changing the dotfiles to my heart's content, I've:
     like `Terminal` color schemes
 
 [pathogen]: https://github.com/tpope/vim-pathogen "pathogen.vim: manage your runtimepath"
+
+***
 
 ## Installation
 
