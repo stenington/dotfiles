@@ -30,11 +30,14 @@ set number
 syntax on
 " Highlight current line
 set cursorline
+" Toggle line highlight (,l)
+nnoremap <silent> <leader>l :set nocursorline!<CR>
 " Make tabs as wide as two spaces
 set tabstop=2
-" Show “invisible” characters
-set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
-set list
+" Toggle show tabs and trailing spaces (,c)
+set lcs=tab:›\ ,trail:·,eol:¬,nbsp:_
+set fcs=fold:-
+nnoremap <silent> <leader>c :set nolist!<CR>
 " Highlight searches
 set hlsearch
 " Ignore case of searches
@@ -59,10 +62,22 @@ set showmode
 set title
 " Show the (partial) command as it’s being typed
 set showcmd
-" Use relative line numbers
+" If we have relative line numbers...
 if exists("&relativenumber")
+  " Use them
 	set relativenumber
 	au BufReadPost * set relativenumber
+  " Add a toggle for them (,n)
+  function! Toggle_relative_line_numbers()
+    if &relativenumber
+      set number
+      au! BufReadPost * set relativenumber
+    else
+      set relativenumber
+      au BufReadPost * set relativenumber
+    endif
+  endfunction
+  nnoremap <silent> <leader>n :call Toggle_relative_line_numbers()<CR>
 endif
 " Start scrolling three lines before the horizontal window border
 set scrolloff=3
