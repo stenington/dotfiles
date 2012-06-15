@@ -102,7 +102,8 @@ if has("autocmd")
 	autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
 endif
 
-" Auto-indentation on
+" Auto-indentation on and toggle (,a)
+nnoremap <silent> <leader>a :set noai!<CR>
 set ai
 " Expand tabs to spaces
 set expandtab
@@ -115,6 +116,12 @@ map <C-J> <C-W>j
 map <C-K> <C-W>k
 map <C-H> <C-W>h
 map <C-L> <C-W>l
+
+" Faster split resizing (+,-)
+if bufwinnr(1)
+  map + <C-W>+
+  map - <C-W>-
+endif
 
 " startup
 autocmd VimEnter * NERDTree
@@ -142,3 +149,21 @@ call pathogen#infect()
 nnoremap <c-a> :set invpaste paste?<CR>
 set pastetoggle=<c-a>
 set showmode
+
+" Sudo write (,W)
+noremap <leader>W :w !sudo tee %<CR>
+
+" Remap :W to :w
+command W w
+
+" Hard to type things
+imap >> →
+imap << ←
+imap ^^ ↑
+imap VV ↓
+imap aa λ
+
+" Sources for MOAR!
+" based on https://github.com/mathiasbynens/dotfiles/blob/master/.vimrc
+" several commands stolen from:
+"   https://github.com/gf3/dotfiles/blob/master/.vimrc
