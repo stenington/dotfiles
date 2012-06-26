@@ -34,6 +34,7 @@ set cursorline
 nnoremap <silent> <leader>l :set nocursorline!<CR>
 " Make tabs as wide as two spaces
 set tabstop=2
+set shiftwidth=2
 " Toggle show tabs and trailing spaces (,c)
 set lcs=tab:›\ ,trail:·,eol:¬,nbsp:_
 set fcs=fold:-
