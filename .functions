@@ -77,3 +77,8 @@ function codepoint() {
 	perl -e "use utf8; print sprintf('U+%04X', ord(\"$@\"))"
 	echo # newline
 }
+
+# Show ports being used
+function seeports() {
+  lsof -Pi | grep LISTEN | awk '{printf "%9s   %15s   %s\n", $1, $9, $2}' | sort -bf
+}

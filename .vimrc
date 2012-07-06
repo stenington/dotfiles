@@ -158,11 +158,12 @@ noremap <leader>W :w !sudo tee %<CR>
 command W w
 
 " Hard to type things
-imap >> →
-imap << ←
-imap ^^ ↑
-imap VV ↓
-imap aa λ
+" Cool but annoying (e.g. I type > more than →)
+"imap >> →
+"imap << ←
+"imap ^^ ↑
+"imap VV ↓
+"imap aa λ
 
 " Sources for MOAR!
 " based on https://github.com/mathiasbynens/dotfiles/blob/master/.vimrc
