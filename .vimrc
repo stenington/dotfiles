@@ -108,6 +108,8 @@ nnoremap <silent> <leader>a :set noai!<CR>
 set ai
 " Expand tabs to spaces
 set expandtab
+" Disable tab expansion (,t)
+nnoremap <silent> <leader>t :set noexpandtab!<CR>
 
 " Split window nav·
 " These maximize the targeted window:
