@@ -1,0 +1,40 @@
+config defaultToCurrentScreen true
+config nudgePercentOf screenSize
+config resizePercentOf screenSize
+
+### Push Bindings
+# [ctrl-cmd ◀/▶] = 1/2 screen left/right
+bind right:ctrl;cmd push right bar-resize:screenSizeX/2
+bind left:ctrl;cmd push left bar-resize:screenSizeX/2
+# [ctrl-alt-cmd ◀/▶] = 1/3 screen left/right
+bind right:ctrl;alt;cmd push right bar-resize:screenSizeX/3
+bind left:ctrl;alt;cmd push left bar-resize:screenSizeX/3
+# [ctrl-shift-cmd ◀/▶] = 2/3 screen left/right
+# +1s below account for rounding error so focus bindings work
+bind right:ctrl;shift;cmd push right bar-resize:((screenSizeX*2/3)+1)
+bind left:ctrl;shift;cmd push left bar-resize:((screenSizeX*2/3)+1)
+# [ctrl-cmd ▲/▼] = fullscreen/float in center
+bind up:ctrl;cmd push up bar-resize:screenSizeY
+bind down:ctrl;cmd move screenSizeX/6;screenSizeY/6 screenSizeX*2/3;screenSizeY*2/3
+
+### Focus Bindings
+# [cmd ◀/▶/▲/▼] = move focus
+bind right:cmd focus right
+bind left:cmd focus left
+bind up:cmd focus up
+bind down:cmd focus down
+
+### Nudge Bindings
+# [alt-cmd ◀/▶/▲/▼] = move by 10px
+bind left:cmd;alt nudge -20 +0
+bind right:cmd;alt nudge +20 +0
+bind down:cmd;alt nudge +0 +20
+bind up:cmd;alt nudge +0 -20
+
+### Throw Bindings
+# [ctrl-cmd N] = fullsize on screen N
+bind 1:ctrl;cmd throw 0 resize
+bind 2:ctrl;cmd throw 1 resize
+
+# Window Hints
+bind esc:cmd hint
