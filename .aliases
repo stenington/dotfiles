@@ -105,3 +105,6 @@ alias hax="growlnotify -a 'Activity Monitor' 'System error' -m 'WTF R U DOIN'"
 
 # Export a heroku .env to the environment
 alias envit='while read -r line; do if [[ "$line" == \#* ]]; then continue; fi; echo "$line"; export "$line"; done < .env'
+
+# Pretty print json
+alias ppj='python -m json.tool'
