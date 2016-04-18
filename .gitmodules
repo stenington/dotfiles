@@ -7,3 +7,6 @@
 [submodule "init/solarized"]
 	path = init/solarized
 	url = https://github.com/tomislav/osx-lion-terminal.app-colors-solarized.git
+[submodule ".vim/bundle/vim-sleuth"]
+	path = .vim/bundle/vim-sleuth
+	url = https://github.com/tpope/vim-sleuth.git

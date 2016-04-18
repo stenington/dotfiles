@@ -34,7 +34,7 @@ set cursorline
 nnoremap <silent> <leader>l :set nocursorline!<CR>
 " Make tabs as wide as two spaces
 set tabstop=2
-set shiftwidth=2
+" set shiftwidth=2
 " Toggle show tabs and trailing spaces (,c)
 set lcs=tab:›\ ,trail:·,eol:¬,nbsp:_
 set fcs=fold:-
@@ -107,9 +107,9 @@ endif
 nnoremap <silent> <leader>a :set noai!<CR>
 set ai
 " Expand tabs to spaces
-set expandtab
-" Disable tab expansion (,t)
-nnoremap <silent> <leader>t :set noexpandtab!<CR>
+" set expandtab
+" Disable tab expansion (,e)
+nnoremap <silent> <leader>e :set noexpandtab!<CR>
 
 " Split window nav·
 " These maximize the targeted window:
@@ -156,8 +156,14 @@ set showmode
 " Sudo write (,W)
 noremap <leader>W :w !sudo tee %<CR>
 
+" Toggle nowrap (,w)
+noremap <leader>w :set nowrap!<CR>
+
 " Remap :W to :w
-command W w
+command! W w
+
+" Reload this puppy
+noremap <leader>r :so $MYVIMRC<CR>
 
 " Hard to type things
 " Cool but annoying (e.g. I type > more than →)
@@ -171,3 +177,82 @@ command W w
 " based on https://github.com/mathiasbynens/dotfiles/blob/master/.vimrc
 " several commands stolen from:
 "   https://github.com/gf3/dotfiles/blob/master/.vimrc
+
+
+
+" Run Tests ******************************************************************
+function! RunTests(filename)
+    " Write the file and run tests for the given filename
+     if filereadable(@%)
+       :wa
+     else
+       :w
+     endif
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    if match(a:filename, '\.feature$') != -1
+        exec ":!script/features " . a:filename
+    else
+        if filereadable("script/test")
+            exec ":!script/test " . a:filename
+        elseif filereadable("Gemfile")
+          if match(a:filename, '_test.rb') != -1
+            exec ":!bundle exec rake test " . a:filename
+          elseif match(a:filename, '_spec.rb') != -1
+            exec ":!bundle exec rspec --color " . a:filename
+          elseif match(a:filename, '_spec.js') != -1
+            exec ":!bundle exec rake konacha:run SPEC=" . a:filename
+          end
+        elseif match(a:filename, 'test.*.py') != -1
+            exec ":!py.test " . a:filename
+        elseif match(a:filename, '_test') != -1
+            exec ":!lein difftest " . a:filename
+        elseif match(a:filename, 'Test') != -1
+            exec ":!javac " . a:filename . ".java && java " . a:filename
+        else
+            exec ":!rspec --color " . a:filename
+        end
+    end
+endfunction
+
+function! SetTestFile()
+    " Set the spec file that tests will be run for.
+    let t:jms_test_file=@%
+endfunction
+
+function! RunTestFile(...)
+    if a:0
+        let command_suffix = a:1
+    else
+        let command_suffix = ""
+    endif
+
+    " Run the tests for the previously-marked file.
+    let in_spec_file = match(expand("%"), '\(.feature\|_spec.rb\)$') != -1
+    let in_test_file = match(expand("%"), '\(.feature\|_test.\(?:rb\|clj|java\)\)$') != -1
+    let in_py_file   = match(expand("%"), '\(.feature\|test.*.py\)$') != -1
+    let in_js_file   = match(expand("%"), '\(.feature\|_spec.js\)$') != -1
+    let in_coffee_file = match(expand("%"), '\(.feature\|Spec.coffee\)$') != -1
+    if in_test_file || in_spec_file || in_py_file || in_js_file || in_coffee_file
+        call SetTestFile()
+    elseif !exists("t:jms_test_file")
+        return
+    end
+    call RunTests(t:jms_test_file . command_suffix)
+endfunction
+
+function! RunNearestTest()
+    let spec_line_number = line('.')
+    call RunTestFile(":" . spec_line_number . " -b")
+endfunction
+
+map <leader>t :call RunTestFile()<cr>
+map <leader>T :call RunNearestTest()<cr>
+map <leader>a :call RunTests('')<cr>
+map <leader>c :w\|:!script/features<cr>
+map <leader>w :w\|:!script/features --profile wip<cr>
+" /Run Tests ******************************************************************
